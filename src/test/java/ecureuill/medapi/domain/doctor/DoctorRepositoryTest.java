@@ -12,7 +12,7 @@ import ecureuill.medapi.domain.address.Address;
 import ecureuill.medapi.domain.address.AddressRecord;
 import ecureuill.medapi.domain.appointment.Appointment;
 import ecureuill.medapi.domain.patient.Patient;
-import ecureuill.medapi.domain.patient.PatientRecord;
+import ecureuill.medapi.domain.patient.PatientCreateRecord;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -88,8 +88,8 @@ public class DoctorRepositoryTest extends AbstractSpringTest {
         );
     }
 
-    private PatientRecord patientRecord(String name, String email, String cpf) {
-        return new PatientRecord(
+    private PatientCreateRecord patientRecord(String name, String email, String cpf) {
+        return new PatientCreateRecord(
                 name,
                 email,
                 cpf,

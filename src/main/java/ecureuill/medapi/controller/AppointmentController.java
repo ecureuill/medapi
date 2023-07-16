@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ecureuill.medapi.domain.appointment.AppointmentDeleteRecord;
 import ecureuill.medapi.domain.appointment.AppointmentDetailRecord;
-import ecureuill.medapi.domain.appointment.AppointmentPostRecord;
-import ecureuill.medapi.domain.appointment.AppointmentScheduler;
+import ecureuill.medapi.domain.appointment.AppointmentCreateRecord;
+import ecureuill.medapi.domain.appointment.AppointmentSchedulerService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -24,12 +24,12 @@ import jakarta.validation.Valid;
 public class AppointmentController {
     
     @Autowired
-    private AppointmentScheduler scheduler;
+    private AppointmentSchedulerService scheduler;
 
     @PostMapping
     @Transactional
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<AppointmentDetailRecord>  schedule(@RequestBody @Valid AppointmentPostRecord data) {
+    public ResponseEntity<AppointmentDetailRecord>  schedule(@RequestBody @Valid AppointmentCreateRecord data) {
         var appointment = scheduler.to_schedule(data);
         return ResponseEntity.ok(appointment);
     }

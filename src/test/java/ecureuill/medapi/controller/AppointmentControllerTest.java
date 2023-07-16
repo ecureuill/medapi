@@ -14,8 +14,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import ecureuill.medapi.domain.appointment.AppointmentDetailRecord;
-import ecureuill.medapi.domain.appointment.AppointmentPostRecord;
-import ecureuill.medapi.domain.appointment.AppointmentScheduler;
+import ecureuill.medapi.domain.appointment.AppointmentCreateRecord;
+import ecureuill.medapi.domain.appointment.AppointmentSchedulerService;
 import ecureuill.medapi.domain.doctor.Speciality;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -35,13 +35,13 @@ public class AppointmentControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private JacksonTester<AppointmentPostRecord> jsonRequest;
+    private JacksonTester<AppointmentCreateRecord> jsonRequest;
 
     @Autowired
     private JacksonTester<AppointmentDetailRecord> jsonResult;
 
     @MockBean
-    private AppointmentScheduler appointmentScheduler;
+    private AppointmentSchedulerService appointmentScheduler;
 
     @Test
     @DisplayName("Should return HTTP 403 when no JWT header was provided")
@@ -81,7 +81,7 @@ public class AppointmentControllerTest {
                 post("/appointments")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonRequest.write(
-                    new AppointmentPostRecord(2l, 5l, date, Speciality.CARDIOLOGIA)
+                    new AppointmentCreateRecord(2l, 5l, date, Speciality.CARDIOLOGIA)
                 ).getJson())
             )
             .andReturn().getResponse();

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import ecureuill.medapi.domain.doctor.DoctorListRecord;
-import ecureuill.medapi.domain.doctor.DoctorPutRecord;
+import ecureuill.medapi.domain.doctor.DoctorUpdateRecord;
 import ecureuill.medapi.domain.doctor.DoctorCreateRecord;
 import ecureuill.medapi.domain.doctor.DoctorDetailRecord;
 import ecureuill.medapi.domain.doctor.DoctorRepository;
@@ -59,7 +59,7 @@ public class DoctorController {
 
     @PutMapping
     @Transactional
-    public ResponseEntity<DoctorDetailRecord> update(@RequestBody @Valid DoctorPutRecord data) {
+    public ResponseEntity<DoctorDetailRecord> update(@RequestBody @Valid DoctorUpdateRecord data) {
         var doctor = repository.getReferenceById(data.id());
         doctor.update(data);
         return ResponseEntity.ok(new DoctorDetailRecord(doctor));

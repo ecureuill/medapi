@@ -3,9 +3,9 @@ package ecureuill.medapi.domain.appointment.validations.schedule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ecureuill.medapi.domain.ValidationException;
-import ecureuill.medapi.domain.appointment.AppointmentPostRecord;
+import ecureuill.medapi.domain.appointment.AppointmentCreateRecord;
 import ecureuill.medapi.domain.patient.PatientRepository;
+import ecureuill.medapi.infra.error.ValidationException;
 
 @Service
 public class InactivePatientValidator implements AppointmentScheduleValidator {
@@ -13,7 +13,7 @@ public class InactivePatientValidator implements AppointmentScheduleValidator {
     @Autowired
     private PatientRepository repository;
     
-    public void validate(AppointmentPostRecord record){
+    public void validate(AppointmentCreateRecord record){
         var exists = repository.existsByIdAndInactiveFalse(record.idPatient());
 
          if(!exists)

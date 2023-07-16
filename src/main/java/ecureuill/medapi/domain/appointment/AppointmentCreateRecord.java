@@ -8,7 +8,7 @@ import ecureuill.medapi.domain.doctor.Speciality;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 
-public record AppointmentPostRecord(
+public record AppointmentCreateRecord(
     Long idDoctor,
 
     @NotNull

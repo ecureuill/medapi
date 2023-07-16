@@ -4,13 +4,13 @@ import java.time.DayOfWeek;
 
 import org.springframework.stereotype.Service;
 
-import ecureuill.medapi.domain.ValidationException;
-import ecureuill.medapi.domain.appointment.AppointmentPostRecord;
+import ecureuill.medapi.domain.appointment.AppointmentCreateRecord;
+import ecureuill.medapi.infra.error.ValidationException;
 
 @Service
 public class TimetableValidator implements AppointmentScheduleValidator {
 
-    public void validate(AppointmentPostRecord record){
+    public void validate(AppointmentCreateRecord record){
 
         var sunday = record.date().getDayOfWeek().equals(DayOfWeek.SUNDAY);
         var initialHour = record.date().getHour() < 7;

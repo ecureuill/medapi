@@ -1,4 +1,4 @@
-package ecureuill.medapi.domain;
+package ecureuill.medapi.infra.error;
 
 public class ValidationException extends RuntimeException {
 

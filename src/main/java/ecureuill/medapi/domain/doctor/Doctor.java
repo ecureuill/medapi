@@ -48,7 +48,7 @@ public class Doctor {
         this.address = new Address(data.address());
     }
 
-    public void update(DoctorPutRecord record) {
+    public void update(DoctorUpdateRecord record) {
         if(record.name() != null)
             this.name = record.name();
         if(record.phone()!= null)

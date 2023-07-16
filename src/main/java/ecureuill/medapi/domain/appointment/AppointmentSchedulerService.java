@@ -7,16 +7,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ecureuill.medapi.domain.ValidationException;
 import ecureuill.medapi.domain.appointment.validations.cancel.AppointmentCancellationValidator;
 import ecureuill.medapi.domain.appointment.validations.schedule.AppointmentScheduleValidator;
 import ecureuill.medapi.domain.doctor.Doctor;
 import ecureuill.medapi.domain.doctor.DoctorRepository;
 import ecureuill.medapi.domain.patient.PatientRepository;
+import ecureuill.medapi.infra.error.ValidationException;
 import jakarta.validation.Valid;
 
 @Service
-public class AppointmentScheduler {
+public class AppointmentSchedulerService {
     
     @Autowired
     private AppointmentRepository appointmentRepository;
@@ -33,7 +33,7 @@ public class AppointmentScheduler {
     @Autowired
     private List<AppointmentCancellationValidator> cancelValidators;
 
-    public AppointmentDetailRecord to_schedule(AppointmentPostRecord data){
+    public AppointmentDetailRecord to_schedule(AppointmentCreateRecord data){
 
         if(!patientRepository.existsById(data.idPatient()))
             throw new ValidationException("Patient not found");
@@ -52,7 +52,7 @@ public class AppointmentScheduler {
         return new AppointmentDetailRecord(appointment.getId(), appointment.getDoctor().getId(), appointment.getPatient().getId(), appointment.getDate());
     }
 
-    private Doctor chooseDoctor(AppointmentPostRecord data) {
+    private Doctor chooseDoctor(AppointmentCreateRecord data) {
         if(data.idDoctor() != null)
             return doctorRepository.getReferenceById(data.idDoctor());
 

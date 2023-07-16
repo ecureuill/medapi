@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import ecureuill.medapi.domain.patient.PatientRecord;
+import ecureuill.medapi.domain.patient.PatientCreateRecord;
 import ecureuill.medapi.domain.patient.PatientDetailRecord;
 import ecureuill.medapi.domain.patient.PatientListRecord;
-import ecureuill.medapi.domain.patient.PatientPutRecord;
+import ecureuill.medapi.domain.patient.PatientUpdateRecord;
 import ecureuill.medapi.domain.patient.PatientRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
@@ -37,7 +37,7 @@ public class PatientController {
     @PostMapping
     @Transactional
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<PatientDetailRecord> save(@RequestBody @Valid PatientRecord data, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<PatientDetailRecord> save(@RequestBody @Valid PatientCreateRecord data, UriComponentsBuilder uriBuilder){
         var patient = repository.save(data.toEntity());
         var uri = uriBuilder.path("/patients/{id}").buildAndExpand(patient.getId()).toUri();
         var dto = new PatientDetailRecord(patient);
@@ -70,7 +70,7 @@ public class PatientController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<PatientDetailRecord> update(@PathVariable Long id, @RequestBody @Valid PatientPutRecord data){
+    public ResponseEntity<PatientDetailRecord> update(@PathVariable Long id, @RequestBody @Valid PatientUpdateRecord data){
         var pacient = repository.getReferenceById(id);
         pacient.update(data);
 

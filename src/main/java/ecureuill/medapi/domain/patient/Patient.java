@@ -32,7 +32,7 @@ public class Patient {
     @Embedded
     private Address address;
 
-    public Patient(PatientRecord data) {
+    public Patient(PatientCreateRecord data) {
         this.inactive = false;
         this.name = data.name();
         this.email = data.email();
@@ -45,7 +45,7 @@ public class Patient {
         this.inactive = true;
     }
 
-    public void update(@Valid PatientPutRecord data) {
+    public void update(@Valid PatientUpdateRecord data) {
         this.name = data.name();
         this.phone = data.phone();
         this.address.update(data.address());
